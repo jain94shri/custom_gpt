@@ -1,0 +1,6 @@
+Flask
+openai
+python-dotenv
+requests
+
+https://platform.openai.com/docs/api-reference/chat
