@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Interface</title>
+</head>
+<body>
+    <h1>Hello, Chat!</h1>
+    <input type="text" id="inputText" placeholder="Type your message here...">
+    <button onclick="sendMessage()">Send</button>
+    <p id="response">Responses will appear here.</p>
+
+    <script>
+        function sendMessage() {
+            var inputText = document.getElementById('inputText').value;
+            fetch('/get_response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({input: inputText}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').textContent = data.response || data.error;
+            })
+            .catch(error => {
+                document.getElementById('response').textContent = 'Error: ' + error.message;
+            });
+        }
+    </script>
+</body>
+</html>
